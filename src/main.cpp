@@ -4,7 +4,7 @@
 
 int main()
 {
- Game game("Hello World");
+ Game game("My name is Taha");
     return 0;
 }
 

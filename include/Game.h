@@ -1,16 +1,12 @@
-#pragma once
-#include "Board.h"
-#include "Player.h"
+# pragma once
+# include <iostream>
 
-class Game {
-protected:
-    Board board;
-    Player p1, p2;
-    int currentPlayer;
-
-public:
-    Game(int r, int c);
-    virtual void start();     // virtual function
-    virtual void turn();      // virtual function
-    void switchPlayer();
+class Game
+{
+    private:
+        std::string test;
+    public:
+    Game(std::string input);
+    
+    
 };

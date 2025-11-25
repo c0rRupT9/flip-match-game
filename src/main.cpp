@@ -4,8 +4,7 @@
 
 int main()
 {
-    Board game(12, 12);
-
+ Game game("My name is Taha");
     return 0;
 }
 

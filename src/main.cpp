@@ -40,7 +40,7 @@ void displayGame(const vector<vector<string>> &board, const vector<vector<bool>>
             else if (revealed[r][c])
                 cout << "|" << board[r][c] << "| ";
             else
-                cout << "|**| ";
+                cout << "|| ";
         }
         cout << "\n";
     }

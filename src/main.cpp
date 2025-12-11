@@ -55,7 +55,7 @@ void displayGame(const vector<vector<string>> &board, const vector<vector<bool>>
 int main()
 {
     srand(time(0));
-    stack<string> movesHistory;
+    queue<string> movesHistory;
     queue<int> playerTurn;
     playerTurn.push(1);
     playerTurn.push(2);
@@ -120,15 +120,12 @@ int main()
             r1--; c1--;
         }
         revealed[r1][c1] = true;
-        movesHistory.push("Flipped (" + to_string(r1+1) + "," + to_string(c1+1) +
-                          ") = " + board[r1][c1]);
+        movesHistory.push("Player " + to_string(currentPlayer) + ": Flipped (" + to_string(r1+1) + "," + to_string(c1+1) + ") = " + board[r1][c1]);
         displayGame(board, revealed, removed, score1, score2, currentPlayer);
         cout << "Enter SECOND card (row col): ";
         cin >> r2 >> c2;
         r2--; c2--;
-        while (r2 < 0 || r2 >= 6 || c2 < 0 || c2 >= 6 ||
-               removed[r2][c2] ||
-               (r1 == r2 && c1 == c2))
+        while (r2 < 0 || r2 >= 6 || c2 < 0 || c2 >= 6 || removed[r2][c2] || (r1 == r2 && c1 == c2))
         {
             if (r1 == r2 && c1 == c2)
                 cout << "Card has already been picked! Enter again: ";
@@ -138,8 +135,7 @@ int main()
             r2--; c2--;
         }
         revealed[r2][c2] = true;
-        movesHistory.push("Flipped (" + to_string(r2+1) + "," + to_string(c2+1) +
-                          ") = " + board[r2][c2]);
+        movesHistory.push("Player " + to_string(currentPlayer) + ": Flipped (" + to_string(r2+1) + "," + to_string(c2+1) + ") = " + board[r2][c2]);
         displayGame(board, revealed, removed, score1, score2, currentPlayer);
         cout << "Press Enter...";
         cin.ignore();
@@ -183,5 +179,18 @@ int main()
         cout << "=========== Winner: Player 2! ===========\n\n";
     else
         cout << "=========== Draw! ===========\n\n";
+    char choice;
+    cout << "Would you like a summary of all player moves? (y/n): ";
+    cin >> choice;
+    if (choice == 'y' || choice == 'Y')
+    {
+        cout << "\nMoves History:\n";
+        while (!movesHistory.empty())
+        {
+            cout << movesHistory.front() << endl;
+            movesHistory.pop();
+        }
+    }
+    cout << "\nThanks for Playing!\n\n";
     return 0;
 }
